@@ -14,9 +14,8 @@ class Task(
     val initialDate: Date,
     val interval: Long
 ) {
-
-    val done = false
-    val active = true
+    var done = false
+    var active = true
 
     fun getNextRunEstimatedString(): String {
         return getNextRun()?.let { date ->

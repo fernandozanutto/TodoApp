@@ -4,12 +4,12 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Minhas tarefas</string>
     <string name="second_fragment_label">Editar tarefa</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="save">Salvar</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="plus_button">Plus button</string>
     <string name="repeat_at">Repete a cada %s %s</string>
     <string name="one_time_task">Tarefa única</string>
+    <string name="create_task">Criar tarefa</string>
 </resources>

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fzanutto.todoapp.database.TaskRepositoryMock
+import com.fzanutto.todoapp.database.TaskRepository
 import com.fzanutto.todoapp.models.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ class HomeViewModel: ViewModel() {
 
     fun requestTaskList() {
         viewModelScope.launch(Dispatchers.IO){
-            val list = TaskRepositoryMock.getAllTasks()
+            val list = TaskRepository.getAllTasks()
             _taskList.postValue(list)
         }
     }
