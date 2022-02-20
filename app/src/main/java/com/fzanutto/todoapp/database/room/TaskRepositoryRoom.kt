@@ -26,4 +26,8 @@ class TaskRepositoryRoom(context: Context) : TaskRepositoryInterface {
     override fun getTaskById(id: Int): Task? {
         return taskDAO.getById(id)?.toModel()
     }
+
+    override fun saveTask(task: Task) {
+        taskDAO.insertTask(TaskDB(task))
+    }
 }

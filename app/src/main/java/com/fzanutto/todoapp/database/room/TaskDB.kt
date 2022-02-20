@@ -13,10 +13,22 @@ class TaskDB(
     val description: String,
     val repeat: RepeatType,
     val initialDate: Date,
-    val interval: Long,
+    val interval: Int,
     val done: Boolean,
     val active: Boolean
 ) {
+
+    constructor(task: Task) : this(
+        0,
+        task.title,
+        task.description,
+        task.repeat,
+        task.initialDate,
+        task.interval,
+        task.done,
+        task.active
+    )
+
     fun toModel(): Task {
         val modelTask = Task(
             id, title, description, repeat, initialDate, interval

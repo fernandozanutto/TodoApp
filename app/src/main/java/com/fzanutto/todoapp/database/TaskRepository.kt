@@ -23,4 +23,8 @@ object TaskRepository {
     fun getAllTasks(): List<Task> {
         return impl.getAllTasks()
     }
+
+    fun saveTask(task: Task) {
+        return impl.saveTask(task)
+    }
 }

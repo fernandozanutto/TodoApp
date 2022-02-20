@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fzanutto.todoapp.R
 import com.fzanutto.todoapp.databinding.TaskRowItemBinding
+import com.fzanutto.todoapp.models.RepeatType
 import com.fzanutto.todoapp.models.Task
 
 class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: ClickListener) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
@@ -28,14 +29,13 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: C
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = taskList[position]
 
-        val nextRun = task.getNextRun()
         val context = holder.itemView.context
 
         holder.binding.apply {
             title.text = task.title
             timer.text = task.getNextRunEstimatedString()
 
-            if (nextRun == task.initialDate) {
+            if (task.repeat == RepeatType.DO_NOT_REPEAT) {
                 type.text = context.getString(R.string.one_time_task)
             } else {
                 type.text = context.getString(R.string.repeat_at, task.interval.toString(), task.repeat.getShortName())

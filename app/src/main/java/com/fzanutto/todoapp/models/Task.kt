@@ -8,11 +8,11 @@ import kotlin.math.ceil
 
 class Task(
     val id: Int,
-    val title: String,
-    val description: String,
-    val repeat: RepeatType,
+    var title: String,
+    var description: String,
+    var repeat: RepeatType,
     val initialDate: Date,
-    val interval: Long
+    var interval: Int
 ) {
     var done = false
     var active = true
@@ -24,14 +24,13 @@ class Task(
         } ?: ""
     }
 
-    fun getNextRun(): Date? {
+    private fun getNextRun(): Date? {
         if (done || !active) return null
 
         val initialMilli = initialDate.time
         val now = Date().time
         val diff = now - initialMilli
-        val intervalInMilli = interval *  repeat.getIntervalMilliFactor()
-
+        val intervalInMilli = interval * repeat.getIntervalMilliFactor()
         val mult = ceil(diff / intervalInMilli.toDouble()).toInt()
 
         return when(repeat) {
@@ -40,12 +39,20 @@ class Task(
             }
             RepeatType.YEARLY -> {
                 val calendar = Calendar.getInstance()
-                calendar.add(Calendar.YEAR, mult)
+
+                while (calendar.time.time < now) {
+                    calendar.add(Calendar.YEAR, interval)
+                }
+
                 Date(calendar.timeInMillis)
             }
             RepeatType.MONTHLY -> {
                 val calendar = Calendar.getInstance()
-                calendar.add(Calendar.MONTH, mult)
+
+                while (calendar.time.time < now) {
+                    calendar.add(Calendar.MONTH, interval)
+                }
+
                 Date(calendar.timeInMillis)
             }
             else -> {

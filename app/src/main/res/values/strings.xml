@@ -11,5 +11,11 @@
     <string name="plus_button">Plus button</string>
     <string name="repeat_at">Repete a cada %s %s</string>
     <string name="one_time_task">Tarefa única</string>
-    <string name="create_task">Criar tarefa</string>
+    <string name="create_task">Nova tarefa</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="repeat">Tipo de repetição</string>
+    <string name="weekly">a cada X semana</string>
+    <string name="interval">Intervalo</string>
+    <string name="date">Data</string>
 </resources>

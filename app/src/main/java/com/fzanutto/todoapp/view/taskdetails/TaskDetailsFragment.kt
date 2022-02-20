@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.fzanutto.todoapp.R
 import com.fzanutto.todoapp.databinding.FragmentTaskDetailsBinding
+import com.fzanutto.todoapp.models.RepeatType
 import com.fzanutto.todoapp.models.Task
 
 class TaskDetailsFragment : Fragment() {
@@ -40,12 +42,23 @@ class TaskDetailsFragment : Fragment() {
         }
 
         binding.buttonSave.setOnClickListener {
+            viewModel.saveTask(
+                binding.title.text.toString(),
+                binding.description.text.toString(),
+                RepeatType.fromInt(binding.repeatType.selectedItemPosition + 1),
+                binding.interval.text.toString().toInt()
+            )
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 
         viewModel.task.observe(viewLifecycleOwner) {
             updateUI(it)
         }
+
+
+        val spinnerValues = RepeatType.values().map { it.getName(requireContext()) }
+        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerValues)
+        binding.repeatType.adapter = spinnerAdapter
     }
 
     override fun onResume() {
@@ -61,8 +74,11 @@ class TaskDetailsFragment : Fragment() {
 
     private fun updateUI(task: Task) {
         binding.apply {
-            title.text = task.title
-            description.text = task.description
+            title.setText(task.title)
+            description.setText(task.description)
+            repeatType.setSelection(task.repeat.type - 1)
+            interval.setText(task.interval.toString())
+            date.setText(task.initialDate.toString())
         }
     }
 }
