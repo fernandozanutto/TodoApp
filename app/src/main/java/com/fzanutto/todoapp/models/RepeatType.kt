@@ -20,4 +20,16 @@ enum class RepeatType {
             DO_NOT_REPEAT -> 0
         }
     }
+
+    fun getShortName(): String {
+        return when (this) {
+            WEEKLY -> "semana(s)"
+            HOURLY -> "hora(s)"
+            YEARLY -> "ano(s)"
+            MONTHLY -> "mes(es)"
+            MINUTES -> "min"
+            DAILY -> "dia(s)"
+            else -> ""
+        }
+    }
 }
