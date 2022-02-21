@@ -30,4 +30,8 @@ class TaskRepositoryRoom(context: Context) : TaskRepositoryInterface {
     override fun saveTask(task: Task) {
         taskDAO.insertTask(TaskDB(task))
     }
+
+    override fun deleteTask(task: Task) {
+        taskDAO.deleteTask(TaskDB(task))
+    }
 }

@@ -1,5 +1,6 @@
 package com.fzanutto.todoapp.view.taskdetails
 
+import android.app.AlarmManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,10 +33,16 @@ class TaskDetailsViewModel: ViewModel() {
             it.repeat = repeatType ?: RepeatType.DO_NOT_REPEAT
             it.interval = interval
             it
-        } ?: run {
-            Task(0, title, description, repeatType ?: RepeatType.DO_NOT_REPEAT, Date(), interval = interval)
-        }
+        } ?: Task(0, title, description, repeatType ?: RepeatType.DO_NOT_REPEAT, Date(), interval = interval)
+
 
         TaskRepository.saveTask(task)
+
+    }
+
+    fun deleteTask() {
+        _task.value?.let {
+            TaskRepository.deleteTask(it)
+        }
     }
 }

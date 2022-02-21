@@ -29,9 +29,6 @@ class Task(
 
         val initialMilli = initialDate.time
         val now = Date().time
-        val diff = now - initialMilli
-        val intervalInMilli = interval * repeat.getIntervalMilliFactor()
-        val mult = ceil(diff / intervalInMilli.toDouble()).toInt()
 
         return when(repeat) {
             RepeatType.DO_NOT_REPEAT -> {
@@ -39,7 +36,7 @@ class Task(
             }
             RepeatType.YEARLY -> {
                 val calendar = Calendar.getInstance()
-
+                calendar.timeInMillis = initialMilli
                 while (calendar.time.time < now) {
                     calendar.add(Calendar.YEAR, interval)
                 }
@@ -48,7 +45,7 @@ class Task(
             }
             RepeatType.MONTHLY -> {
                 val calendar = Calendar.getInstance()
-
+                calendar.timeInMillis = initialMilli
                 while (calendar.time.time < now) {
                     calendar.add(Calendar.MONTH, interval)
                 }
@@ -56,6 +53,9 @@ class Task(
                 Date(calendar.timeInMillis)
             }
             else -> {
+                val diff = now - initialMilli
+                val intervalInMilli = interval * repeat.getIntervalMilliFactor()
+                val mult = ceil(diff / intervalInMilli.toDouble()).toInt()
                 Date(initialMilli + mult * intervalInMilli)
             }
         }

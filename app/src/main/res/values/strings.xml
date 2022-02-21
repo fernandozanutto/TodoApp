@@ -18,4 +18,6 @@
     <string name="weekly">a cada X semana</string>
     <string name="interval">Intervalo</string>
     <string name="date">Data</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Excluir</string>
 </resources>

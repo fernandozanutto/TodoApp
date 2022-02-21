@@ -51,6 +51,15 @@ class TaskDetailsFragment : Fragment() {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 
+        binding.buttonCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+
+        binding.buttonDelete.setOnClickListener {
+            viewModel.deleteTask()
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+
         viewModel.task.observe(viewLifecycleOwner) {
             updateUI(it)
         }
@@ -78,7 +87,7 @@ class TaskDetailsFragment : Fragment() {
             description.setText(task.description)
             repeatType.setSelection(task.repeat.type - 1)
             interval.setText(task.interval.toString())
-            date.setText(task.initialDate.toString())
+            date.text = task.initialDate.toString()
         }
     }
 }

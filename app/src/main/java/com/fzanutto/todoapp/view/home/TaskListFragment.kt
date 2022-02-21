@@ -45,6 +45,10 @@ class TaskListFragment : Fragment(), TaskAdapter.ClickListener {
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+
+        viewModel.createNotificationChannel(requireContext())
+
+        viewModel.scheduleNotification(requireContext())
     }
 
     override fun onResume() {

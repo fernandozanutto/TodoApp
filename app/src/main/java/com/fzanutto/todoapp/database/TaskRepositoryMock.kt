@@ -33,4 +33,10 @@ class TaskRepositoryMock: TaskRepositoryInterface {
         }
     }
 
+    override fun deleteTask(task: Task) {
+        taskList.removeAll {
+            it.id == task.id
+        }
+    }
+
 }

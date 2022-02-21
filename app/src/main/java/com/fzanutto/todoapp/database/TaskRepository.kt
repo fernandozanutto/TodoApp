@@ -27,4 +27,8 @@ object TaskRepository {
     fun saveTask(task: Task) {
         return impl.saveTask(task)
     }
+
+    fun deleteTask(task: Task) {
+        impl.deleteTask(task)
+    }
 }
