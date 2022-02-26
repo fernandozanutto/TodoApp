@@ -6,6 +6,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.math.ceil
 
+
 class Task(
     val id: Int,
     var title: String,
@@ -24,7 +25,7 @@ class Task(
         } ?: ""
     }
 
-    private fun getNextRun(): Date? {
+    fun getNextRun(): Date? {
         if (done || !active) return null
 
         val initialMilli = initialDate.time
@@ -59,5 +60,12 @@ class Task(
                 Date(initialMilli + mult * intervalInMilli)
             }
         }
+    }
+
+    override fun toString(): String {
+        val nextRun = getNextRun()?.let {
+            it.time - Date().time
+        } ?: "none"
+        return "$id - $title - $nextRun"
     }
 }

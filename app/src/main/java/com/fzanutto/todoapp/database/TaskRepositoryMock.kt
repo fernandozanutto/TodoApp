@@ -6,8 +6,8 @@ import java.util.Date
 
 class TaskRepositoryMock: TaskRepositoryInterface {
 
-    val taskList = arrayListOf(
-        //Task(1, "Beber água", "", RepeatType.MINUTES, Date(1645383091688), 30),
+    private val taskList = arrayListOf(
+        Task(1, "Beber água", "bebe aguaaaaaaa", RepeatType.SECONDS, Date(1645383091688), 20),
         //Task(2, "Beber água de 45 em 45", "", RepeatType.MINUTES, Date(), 45),
         Task(3, "Eliminação BBB", "", RepeatType.WEEKLY, Date(1644951091688), 1),
         Task(4, "Lavar Roupa", "", RepeatType.DO_NOT_REPEAT, Date(1645393891688), 0),

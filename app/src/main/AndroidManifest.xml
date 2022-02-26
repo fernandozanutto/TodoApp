@@ -11,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoApp">
+        <activity
+            android:name=".view.taskdetails.TaskDetailsActivity"
+            android:exported="false" />
 
         <receiver
-            android:name=".notification.Notification"
+            android:name=".notification.TaskNotification"
             android:enabled="true" />
-
         <receiver
-            android:name=".notification.ActionReceiver"
+            android:name=".notification.CompleteTaskActionReceiver"
             android:enabled="true" />
 
         <activity

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        TaskRepository.initialize(true, this)
+        TaskRepository.initialize(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {

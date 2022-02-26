@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.fzanutto.todoapp.R
 import com.fzanutto.todoapp.databinding.FragmentTaskListBinding
+import com.fzanutto.todoapp.notification.NotificationManager
 
 
 class TaskListFragment : Fragment(), TaskAdapter.ClickListener {
@@ -38,17 +39,19 @@ class TaskListFragment : Fragment(), TaskAdapter.ClickListener {
 
         binding.tasks.adapter = adapter
 
-        viewModel.taskList.observe(viewLifecycleOwner) {
-            adapter.updateTaskList(it)
+        viewModel.taskList.observe(viewLifecycleOwner) { tasks ->
+            adapter.updateTaskList(tasks)
+
+            tasks.forEach {
+                NotificationManager.scheduleTaskNotification(requireContext(), it)
+            }
         }
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        viewModel.createNotificationChannel(requireContext())
-
-        viewModel.scheduleNotification(requireContext())
+        NotificationManager.createNotificationChannel(requireContext())
     }
 
     override fun onResume() {

@@ -10,7 +10,8 @@ enum class RepeatType(val type: Int) {
     MONTHLY(4),
     MINUTES(5),
     YEARLY(6),
-    WEEKLY(7);
+    WEEKLY(7),
+    SECONDS(8);
 
     companion object {
         fun fromInt(value: Int): RepeatType? {
@@ -20,6 +21,7 @@ enum class RepeatType(val type: Int) {
 
     fun getIntervalMilliFactor(): Long {
         return when(this) {
+            SECONDS -> 1000
             MINUTES -> 1000 * 60
             HOURLY -> 1000 * 60 * 60
             DAILY -> 1000 * 60 * 60 * 24
@@ -32,6 +34,7 @@ enum class RepeatType(val type: Int) {
 
     fun getName(context: Context): String {
         return when (this) {
+            SECONDS -> "a cada X segundos"
             WEEKLY -> context.getString(R.string.weekly)
             HOURLY -> "a cada X horas"
             YEARLY -> "a cada X anos"
@@ -45,6 +48,7 @@ enum class RepeatType(val type: Int) {
 
     fun getShortName(): String {
         return when (this) {
+            SECONDS -> "segundo(s)"
             WEEKLY -> "semana(s)"
             HOURLY -> "hora(s)"
             YEARLY -> "ano(s)"
