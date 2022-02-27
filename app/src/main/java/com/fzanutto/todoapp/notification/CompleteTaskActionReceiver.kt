@@ -7,6 +7,9 @@ import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import com.fzanutto.todoapp.database.TaskRepository
 import com.fzanutto.todoapp.notification.NotificationManager.taskIdTag
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CompleteTaskActionReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -16,10 +19,14 @@ class CompleteTaskActionReceiver: BroadcastReceiver() {
 
         TaskRepository.initialize(context)
 
-        val task = TaskRepository.getTaskById(taskId) ?: return
-
         with(NotificationManagerCompat.from(context)) {
             cancel(taskId.taskIdToNotificationId())
+        }
+
+        CoroutineScope(Dispatchers.Default).launch {
+            val task = TaskRepository.getTaskById(taskId) ?: return@launch
+
+            // TODO registrar que a task foi concluida
         }
     }
 }
