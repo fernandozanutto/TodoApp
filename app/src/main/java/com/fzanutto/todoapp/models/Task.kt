@@ -12,7 +12,7 @@ class Task(
     var title: String,
     var description: String,
     var repeat: RepeatType,
-    val initialDate: Date,
+    var initialDate: Date,
     var interval: Int
 ) {
     var done = false
@@ -54,7 +54,7 @@ class Task(
                 Date(calendar.timeInMillis)
             }
             else -> {
-                val diff = now - initialMilli
+                val diff = (now - initialMilli).coerceAtLeast(0)
                 val intervalInMilli = interval * repeat.getIntervalMilliFactor()
                 val mult = ceil(diff / intervalInMilli.toDouble()).toInt()
                 Date(initialMilli + mult * intervalInMilli)

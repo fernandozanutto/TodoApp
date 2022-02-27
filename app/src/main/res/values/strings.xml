@@ -17,7 +17,8 @@
     <string name="repeat">Tipo de repetição</string>
     <string name="weekly">a cada X semana</string>
     <string name="interval">Intervalo</string>
-    <string name="date">Data</string>
+    <string name="initial_date">Data Inicial</string>
     <string name="cancel">Cancelar</string>
     <string name="delete">Excluir</string>
+    <string name="initial_time">Hora Inicial</string>
 </resources>
