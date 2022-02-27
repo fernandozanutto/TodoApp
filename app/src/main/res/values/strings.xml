@@ -13,4 +13,5 @@
     <string name="initial_date">Data Inicial</string>
     <string name="delete">Excluir</string>
     <string name="initial_time">Hora Inicial</string>
+    <string name="content_description_delete">Delete tasks</string>
 </resources>

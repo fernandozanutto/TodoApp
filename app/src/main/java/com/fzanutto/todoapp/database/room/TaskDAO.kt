@@ -20,4 +20,7 @@ interface TaskDAO {
 
     @Delete
     fun deleteTask(task: TaskDB)
+
+    @Query("DELETE FROM task WHERE id IN (:tasksId)")
+    fun deleteTasksById(tasksId: List<Int>)
 }

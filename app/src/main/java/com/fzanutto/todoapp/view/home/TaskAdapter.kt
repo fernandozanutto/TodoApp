@@ -9,7 +9,9 @@ import com.fzanutto.todoapp.databinding.TaskRowItemBinding
 import com.fzanutto.todoapp.models.RepeatType
 import com.fzanutto.todoapp.models.Task
 
-class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: ClickListener) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: TaskClickListener) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+
+    private val selectedItems = mutableSetOf<Int>()
 
     class ViewHolder(val binding: TaskRowItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -18,6 +20,22 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: C
         taskList.clear()
         taskList.addAll(newList)
         notifyDataSetChanged()
+    }
+
+    private fun toggleItemSelected(taskId: Int) {
+        if (selectedItems.contains(taskId)) {
+            selectedItems.remove(taskId)
+        } else {
+            selectedItems.add(taskId)
+        }
+
+        listener.onToggleCheckAdapterItem(taskId)
+        notifyItemRangeChanged(0, itemCount)
+    }
+
+    fun uncheckEverything() {
+        selectedItems.clear()
+        notifyItemRangeChanged(0, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,6 +50,13 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: C
         val context = holder.itemView.context
 
         holder.binding.apply {
+            card.setOnLongClickListener {
+                toggleItemSelected(task.id)
+                true
+            }
+
+            card.isChecked = selectedItems.contains(task.id)
+
             title.text = task.title
             timer.text = task.getNextRunEstimatedString()
 
@@ -43,13 +68,18 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: C
         }
 
         holder.itemView.setOnClickListener {
-            listener.onClick(task.id)
+            if (selectedItems.size == 0) {
+                listener.onClickAdapterItem(task.id)
+            } else {
+                toggleItemSelected(task.id)
+            }
         }
     }
 
     override fun getItemCount() = taskList.size
 
-    interface ClickListener {
-        fun onClick(taskId: Int)
+    interface TaskClickListener {
+        fun onClickAdapterItem(taskId: Int)
+        fun onToggleCheckAdapterItem(taskId: Int)
     }
 }

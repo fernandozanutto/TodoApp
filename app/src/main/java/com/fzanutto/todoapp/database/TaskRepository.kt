@@ -19,19 +19,23 @@ object TaskRepository {
         }
     }
 
-    fun getTaskById(position: Int): Task? {
+    suspend fun getTaskById(position: Int): Task? {
         return impl.getTaskById(position)
     }
 
-    fun getAllTasks(): List<Task> {
+    suspend fun getAllTasks(): List<Task> {
         return impl.getAllTasks()
     }
 
-    fun saveTask(task: Task) {
+    suspend fun saveTask(task: Task) {
         return impl.saveTask(task)
     }
 
-    fun deleteTask(task: Task) {
+    suspend fun deleteTask(task: Task) {
         impl.deleteTask(task)
+    }
+
+    suspend fun deleteTasksById(tasksId: List<Int>) {
+        impl.deleteTasksById(tasksId)
     }
 }

@@ -4,8 +4,9 @@ import com.fzanutto.todoapp.models.Task
 
 interface TaskRepositoryInterface {
 
-    fun getAllTasks(): List<Task>
-    fun getTaskById(id: Int): Task?
-    fun saveTask(task: Task)
-    fun deleteTask(task: Task)
+    suspend fun getAllTasks(): List<Task>
+    suspend fun getTaskById(id: Int): Task?
+    suspend fun saveTask(task: Task)
+    suspend fun deleteTask(task: Task)
+    suspend fun deleteTasksById(tasksId: List<Int>)
 }

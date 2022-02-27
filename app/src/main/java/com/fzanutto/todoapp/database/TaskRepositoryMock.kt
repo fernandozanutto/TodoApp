@@ -13,17 +13,17 @@ class TaskRepositoryMock: TaskRepositoryInterface {
         Task(4, "Lavar Roupa", "", RepeatType.DO_NOT_REPEAT, Date(1645393891688), 0),
     )
 
-    override fun getAllTasks(): List<Task> {
+    override suspend fun getAllTasks(): List<Task> {
         return taskList
     }
 
-    override fun getTaskById(id: Int): Task? {
+    override suspend fun getTaskById(id: Int): Task? {
         return taskList.firstOrNull {
             it.id == id
         }
     }
 
-    override fun saveTask(task: Task) {
+    override suspend fun saveTask(task: Task) {
         val indexToUpdate = taskList.indexOfFirst { it.id == task.id }
 
         if (indexToUpdate == -1) {
@@ -33,9 +33,15 @@ class TaskRepositoryMock: TaskRepositoryInterface {
         }
     }
 
-    override fun deleteTask(task: Task) {
+    override suspend fun deleteTask(task: Task) {
         taskList.removeAll {
             it.id == task.id
+        }
+    }
+
+    override suspend fun deleteTasksById(tasksId: List<Int>) {
+        taskList.removeAll {
+            it.id in tasksId
         }
     }
 

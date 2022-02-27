@@ -19,19 +19,23 @@ class TaskRepositoryRoom(context: Context) : TaskRepositoryInterface {
     }
 
 
-    override fun getAllTasks(): List<Task> {
+    override suspend fun getAllTasks(): List<Task> {
         return taskDAO.getAll().map { it.toModel() }
     }
 
-    override fun getTaskById(id: Int): Task? {
+    override suspend fun getTaskById(id: Int): Task? {
         return taskDAO.getById(id)?.toModel()
     }
 
-    override fun saveTask(task: Task) {
+    override suspend fun saveTask(task: Task) {
         taskDAO.insertTask(TaskDB(task))
     }
 
-    override fun deleteTask(task: Task) {
+    override suspend fun deleteTask(task: Task) {
         taskDAO.deleteTask(TaskDB(task))
+    }
+
+    override suspend fun deleteTasksById(tasksId: List<Int>) {
+        taskDAO.deleteTasksById(tasksId)
     }
 }

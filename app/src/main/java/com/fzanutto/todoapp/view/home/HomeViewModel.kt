@@ -21,4 +21,11 @@ class HomeViewModel : ViewModel() {
             _taskList.postValue(list)
         }
     }
+
+    fun deleteTasks(tasksId: List<Int>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            TaskRepository.deleteTasksById(tasksId)
+            _taskList.postValue(_taskList.value?.filter { it.id !in tasksId })
+        }
+    }
 }
