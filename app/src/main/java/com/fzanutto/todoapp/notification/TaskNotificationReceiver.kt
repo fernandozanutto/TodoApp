@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class TaskNotification : BroadcastReceiver() {
+class TaskNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val notificationTitle = intent.getStringExtra(titleExtra)
         val notificationBody = intent.getStringExtra(messageExtra)
@@ -49,6 +49,7 @@ class TaskNotification : BroadcastReceiver() {
                 .build()
 
             with(NotificationManagerCompat.from(context)) {
+                cancel(taskId.taskIdToNotificationId())
                 notify(taskId.taskIdToNotificationId(), notification)
             }
 

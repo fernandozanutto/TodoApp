@@ -34,7 +34,7 @@ object NotificationManager {
         val time = task.getNextRun() ?: return
         if (Date() > time) return
 
-        val intent = Intent(context, TaskNotification::class.java)
+        val intent = Intent(context, TaskNotificationReceiver::class.java)
 
         intent.putExtra(titleExtra, task.title)
         intent.putExtra(messageExtra, task.description)

@@ -20,7 +20,7 @@
             android:parentActivityName=".view.home.HomeActivity" />
 
         <receiver
-            android:name=".notification.TaskNotification"
+            android:name=".notification.TaskNotificationReceiver"
             android:enabled="true" />
         <receiver
             android:name=".notification.CompleteTaskActionReceiver"

@@ -3,6 +3,7 @@ package com.fzanutto.todoapp.database.room
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
@@ -14,7 +15,7 @@ interface TaskDAO {
     @Query("SELECT * FROM task WHERE id = :id")
     fun getById(id: Int): TaskDB?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTask(task: TaskDB)
 
     @Delete
