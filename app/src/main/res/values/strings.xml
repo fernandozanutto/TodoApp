@@ -1,14 +1,7 @@
 <resources>
-    <string name="app_name">TodoApp</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Minhas tarefas</string>
-    <string name="second_fragment_label">Editar tarefa</string>
+    <string name="app_name">Minhas Tarefas</string>
     <string name="save">Salvar</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="plus_button">Plus button</string>
+    <string name="plus_button">Botão de mais</string>
     <string name="repeat_at">Repete a cada %s %s</string>
     <string name="one_time_task">Tarefa única</string>
     <string name="create_task">Nova tarefa</string>
@@ -18,7 +11,6 @@
     <string name="weekly">a cada X semana</string>
     <string name="interval">Intervalo</string>
     <string name="initial_date">Data Inicial</string>
-    <string name="cancel">Cancelar</string>
     <string name="delete">Excluir</string>
     <string name="initial_time">Hora Inicial</string>
 </resources>

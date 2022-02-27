@@ -38,6 +38,7 @@ class TaskDetailsActivity : AppCompatActivity() {
 
         if (taskID == -1) {
             supportActionBar?.title = getString(R.string.create_task)
+            binding.buttonDelete.visibility = View.GONE
         }
 
         binding.buttonSave.setOnClickListener {
@@ -48,10 +49,6 @@ class TaskDetailsActivity : AppCompatActivity() {
                 binding.interval.text.toString().toInt(),
                 datePickerDate
             )
-            finish()
-        }
-
-        binding.buttonCancel.setOnClickListener {
             finish()
         }
 
@@ -89,7 +86,7 @@ class TaskDetailsActivity : AppCompatActivity() {
         binding.apply {
             title.setText(task.title)
             description.setText(task.description)
-            repeatType.setText(repeatType.adapter.getItem(task.repeat.type - 1).toString(), false);
+            repeatType.setText(repeatType.adapter.getItem(task.repeat.type - 1).toString(), false)
             interval.setText(task.interval.toString())
         }
 

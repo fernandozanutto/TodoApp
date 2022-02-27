@@ -6,14 +6,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_task_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_task_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoApp">
-        <activity
-            android:name=".view.teste.TesteActivity"
-            android:exported="false" />
         <activity
             android:name=".view.taskdetails.TaskDetailsActivity"
             android:exported="false"

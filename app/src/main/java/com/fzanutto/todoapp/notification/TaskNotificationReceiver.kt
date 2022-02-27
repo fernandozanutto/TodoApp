@@ -37,7 +37,7 @@ class TaskNotificationReceiver : BroadcastReceiver() {
             val action = getNotificationAction(context, taskId)
 
             val notification = NotificationCompat.Builder(context, channelID)
-                .setSmallIcon(R.drawable.ic_baseline_edit_24)
+                .setSmallIcon(R.mipmap.ic_task_launcher_round)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)
                 .setContentIntent(clickPendingIntent)
@@ -88,7 +88,7 @@ class TaskNotificationReceiver : BroadcastReceiver() {
         )
 
         return NotificationCompat.Action.Builder(
-            R.drawable.ic_launcher_background,
+            R.mipmap.ic_task_launcher_round,
             "Concluído",
             pendingIntent
         ).build()

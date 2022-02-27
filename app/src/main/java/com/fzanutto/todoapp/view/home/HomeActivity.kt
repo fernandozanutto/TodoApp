@@ -1,10 +1,8 @@
 package com.fzanutto.todoapp.view.home
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.activity.viewModels
 import com.fzanutto.todoapp.database.TaskRepository
 import com.fzanutto.todoapp.databinding.ActivityMainBinding
@@ -29,6 +27,7 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.ClickListener {
         setSupportActionBar(binding.toolbar)
 
         TaskRepository.initialize(this)
+        NotificationManager.createNotificationChannel(this)
 
         _adapter = TaskAdapter(arrayListOf(), this)
 
@@ -45,8 +44,6 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.ClickListener {
         binding.fab.setOnClickListener {
             startDetailsActivity()
         }
-
-        NotificationManager.createNotificationChannel(this)
     }
 
     override fun onResume() {
@@ -68,6 +65,6 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.ClickListener {
             putExtra(TaskDetailsActivity.TASK_ID, taskId)
         }
 
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+        startActivity(intent)
     }
 }

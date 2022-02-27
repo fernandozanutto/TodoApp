@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Tasks</string>
+    <string name="save">Save</string>
+    <string name="plus_button">Plus button</string>
+    <string name="repeat_at">Repeat every %s %s</string>
+    <string name="one_time_task">One-time task</string>
+    <string name="create_task">New task</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="repeat">Repeat type</string>
+    <string name="weekly">every X weeks</string>
+    <string name="interval">Interval</string>
+    <string name="initial_date">Initial Date</string>
+    <string name="delete">Delete</string>
+    <string name="initial_time">Initial Hour</string>
+</resources>
