@@ -19,7 +19,7 @@ class TaskDB(
 ) {
 
     constructor(task: Task) : this(
-        0,
+        task.id,
         task.title,
         task.description,
         task.repeat,
