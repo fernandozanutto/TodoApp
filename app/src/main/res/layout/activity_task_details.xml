@@ -83,40 +83,45 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_label"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/initial_date"
+            android:hint="@string/initial_date"
+            app:endIconDrawable="@drawable/ic_date"
+            app:endIconMode="custom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/interval_label" />
+            app:layout_constraintTop_toBottomOf="@+id/interval_label">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/date_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/date_label" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/time_label"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/initial_time"
+            android:hint="@string/initial_time"
+            app:endIconDrawable="@drawable/ic_time"
+            app:endIconMode="custom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_label" />
+            app:layout_constraintTop_toBottomOf="@+id/date_label">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/time_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/time_label" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
@@ -125,8 +130,7 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_cancel"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/button_cancel"
@@ -134,8 +138,8 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/button_delete"
-            app:layout_constraintStart_toEndOf="@id/button_save" />
+            app:layout_constraintEnd_toStartOf="@id/button_save"
+            app:layout_constraintStart_toEndOf="@id/button_delete" />
 
         <Button
             android:id="@+id/button_delete"
@@ -143,8 +147,8 @@
             android:layout_height="wrap_content"
             android:text="@string/delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/button_cancel" />
+
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

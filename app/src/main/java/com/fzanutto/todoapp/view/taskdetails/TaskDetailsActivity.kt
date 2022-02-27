@@ -104,22 +104,22 @@ class TaskDetailsActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-        binding.date.text = dateFormat.format(initialDate)
-        binding.time.text = timeFormat.format(initialDate)
+        binding.date.setText(dateFormat.format(initialDate))
+        binding.time.setText(timeFormat.format(initialDate))
 
         val datePickerListenerFrom = DatePickerDialog.OnDateSetListener { picker, _, _, _ ->
             fromDateCalendar.set(Calendar.MONTH, picker.month)
             fromDateCalendar.set(Calendar.DAY_OF_MONTH, picker.dayOfMonth)
             fromDateCalendar.set(Calendar.YEAR, picker.year)
             datePickerDate.time = fromDateCalendar.timeInMillis
-            binding.date.text = dateFormat.format(datePickerDate)
+            binding.date.setText(dateFormat.format(datePickerDate))
         }
 
         val timePickerListener = TimePickerDialog.OnTimeSetListener { timePicker, _, _ ->
             fromDateCalendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
             fromDateCalendar.set(Calendar.MINUTE, timePicker.minute)
             datePickerDate.time = fromDateCalendar.timeInMillis
-            binding.time.text = timeFormat.format(datePickerDate)
+            binding.time.setText(timeFormat.format(datePickerDate))
         }
 
         binding.date.setOnClickListener {
