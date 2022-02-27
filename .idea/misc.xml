@@ -3,14 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/activity_task_details.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/content_main.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/fragment_first.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/fragment_second.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/fragment_task_details.xml" value="0.33" />
-        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/fragment_task_list.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/fragment_task_list.xml" value="0.1" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/task_row_item.xml" value="0.33" />
+        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/teste_activity.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/layout/teste_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ferna/Documents/GitHub/TodoApp/app/src/main/res/menu/menu_main.xml" value="0.18541666666666667" />
       </map>
     </option>

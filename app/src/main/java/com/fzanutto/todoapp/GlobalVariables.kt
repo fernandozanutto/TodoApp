@@ -1,5 +1,5 @@
 package com.fzanutto.todoapp
 
 object GlobalVariables {
-    val isTestMode = true
+    val isTestMode = false
 }

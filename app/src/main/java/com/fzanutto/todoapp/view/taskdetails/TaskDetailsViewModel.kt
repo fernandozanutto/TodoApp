@@ -1,6 +1,5 @@
 package com.fzanutto.todoapp.view.taskdetails
 
-import android.app.AlarmManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,9 +16,8 @@ class TaskDetailsViewModel: ViewModel() {
     private val _task = MutableLiveData<Task>()
     val task: LiveData<Task> = _task
 
-
     fun requestTask(id: Int) {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             TaskRepository.getTaskById(id)?.let { task ->
                 _task.postValue(task)
             }
@@ -35,14 +33,16 @@ class TaskDetailsViewModel: ViewModel() {
             it
         } ?: Task(0, title, description, repeatType ?: RepeatType.DO_NOT_REPEAT, Date(), interval = interval)
 
-
-        TaskRepository.saveTask(task)
-
+        viewModelScope.launch(Dispatchers.IO) {
+            TaskRepository.saveTask(task)
+        }
     }
 
     fun deleteTask() {
         _task.value?.let {
-            TaskRepository.deleteTask(it)
+            viewModelScope.launch(Dispatchers.IO) {
+                TaskRepository.deleteTask(it)
+            }
         }
     }
 }

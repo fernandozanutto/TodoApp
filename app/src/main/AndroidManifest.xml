@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoApp">
         <activity
-            android:name=".view.taskdetails.TaskDetailsActivity"
+            android:name=".view.teste.TesteActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.taskdetails.TaskDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".view.home.HomeActivity" />
 
         <receiver
             android:name=".notification.TaskNotification"
@@ -23,9 +27,8 @@
             android:enabled="true" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.home.HomeActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.TodoApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

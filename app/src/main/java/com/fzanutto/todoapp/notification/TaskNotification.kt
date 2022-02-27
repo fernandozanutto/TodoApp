@@ -1,19 +1,23 @@
 package com.fzanutto.todoapp.notification
 
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.fzanutto.todoapp.MainActivity
 import com.fzanutto.todoapp.R
 import com.fzanutto.todoapp.database.TaskRepository
 import com.fzanutto.todoapp.notification.NotificationManager.channelID
 import com.fzanutto.todoapp.notification.NotificationManager.messageExtra
 import com.fzanutto.todoapp.notification.NotificationManager.taskIdTag
 import com.fzanutto.todoapp.notification.NotificationManager.titleExtra
+import com.fzanutto.todoapp.view.taskdetails.TaskDetailsActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class TaskNotification : BroadcastReceiver() {
@@ -24,40 +28,48 @@ class TaskNotification : BroadcastReceiver() {
 
         if (taskId == -1) return
 
-        TaskRepository.initialize(context)
-        val task = TaskRepository.getTaskById(taskId) ?: return
+        CoroutineScope(Dispatchers.Default).launch {
+            TaskRepository.initialize(context)
+            val task = TaskRepository.getTaskById(taskId) ?: return@launch
 
-        val clickPendingIntent = getClickIntent(context, taskId)
+            val clickPendingIntent = getClickIntent(context, taskId)
 
-        val action = getNotificationAction(context, taskId)
+            val action = getNotificationAction(context, taskId)
 
-        val notification = NotificationCompat.Builder(context, channelID)
-            .setSmallIcon(R.drawable.ic_baseline_edit_24)
-            .setContentTitle(notificationTitle)
-            .setContentText(notificationBody)
-            .setContentIntent(clickPendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_REMINDER)
-            .addAction(action)
-            .setAutoCancel(true)
-            .setOngoing(true)
-            .build()
+            val notification = NotificationCompat.Builder(context, channelID)
+                .setSmallIcon(R.drawable.ic_baseline_edit_24)
+                .setContentTitle(notificationTitle)
+                .setContentText(notificationBody)
+                .setContentIntent(clickPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .addAction(action)
+                .setAutoCancel(true)
+                .setOngoing(true)
+                .build()
 
-        with(NotificationManagerCompat.from(context)) {
-            notify(taskId.taskIdToNotificationId(), notification)
+            with(NotificationManagerCompat.from(context)) {
+                notify(taskId.taskIdToNotificationId(), notification)
+            }
+
+            NotificationManager.scheduleTaskNotification(context, task)
+            Log.d("notification", "${task.id} ${task.title}")
         }
-
-        NotificationManager.scheduleTaskNotification(context, task)
-        Log.d("notification", "${task.id} ${task.title}")
     }
 
     private fun getClickIntent(context: Context, taskId: Int): PendingIntent {
-        val clickIntent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra(taskIdTag, taskId)
+        val clickIntent = Intent(context, TaskDetailsActivity::class.java).apply {
+            putExtra(TaskDetailsActivity.TASK_ID, taskId)
         }
 
-        return PendingIntent.getActivity(context, 0, clickIntent, PendingIntent.FLAG_IMMUTABLE)
+        val resultPendingIntent = TaskStackBuilder.create(context).run {
+            // Add the intent, which inflates the back stack
+            addNextIntentWithParentStack(clickIntent)
+            // Get the PendingIntent containing the entire back stack
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        }
+
+        return resultPendingIntent
     }
 
 
