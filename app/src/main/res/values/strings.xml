@@ -14,7 +14,7 @@
     <string name="delete">Excluir</string>
     <string name="initial_time">Hora Inicial</string>
     <string name="content_description_delete">Excluir tarefas</string>
-    <string name="next_reminder">Próximo lembrete </string>
+    <string name="next_reminder">Próximo lembrete\ </string>
     <string name="task_done">Tarefa concluída</string>
     <string name="in_less_than_1_minute">em menos de 1 minuto</string>
     <string name="in_minutes">em %s minutos</string>

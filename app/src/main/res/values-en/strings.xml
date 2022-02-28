@@ -15,7 +15,7 @@
     <string name="delete">Delete</string>
     <string name="initial_time">Initial Hour</string>
     <string name="content_description_delete">Delete tasks</string>
-    <string name="next_reminder">Next reminder </string>
+    <string name="next_reminder">Next reminder\ </string>
     <string name="task_done">Task Done</string>
     <string name="in_less_than_1_minute">in less than 1 minute</string>
     <string name="in_minutes">in %s minutes</string>

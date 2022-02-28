@@ -12,25 +12,23 @@ import java.util.Date
 
 object NotificationManager {
 
-    const val channelID = "channel1"
+    const val channelID = "todoAppChannel"
     const val titleExtra = "titleExtra"
     const val messageExtra = "messageExtra"
     const val taskIdTag = "taskId"
 
     fun createNotificationChannel(context: Context) {
-        val name = "Todo List"
-        val descriptionText = ""
+        val name = "TodoAppReminderChannel"
+        val descriptionText = "Channel For Alarm Manager"
         val importance = NotificationManager.IMPORTANCE_HIGH
         val channel = NotificationChannel(channelID, name, importance)
         channel.description = descriptionText
 
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = context.getSystemService(android.app.NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
     }
 
     fun scheduleTaskNotification(context: Context, task: Task) {
-
         val time = task.getNextRun() ?: return
         if (Date() > time) return
 
