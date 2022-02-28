@@ -7,11 +7,15 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.appcompat.view.ActionMode
+import androidx.lifecycle.lifecycleScope
 import com.fzanutto.todoapp.R
-import com.fzanutto.todoapp.database.TaskRepository
+import com.fzanutto.todoapp.database.TaskRepositoryManager
 import com.fzanutto.todoapp.databinding.ActivityMainBinding
 import com.fzanutto.todoapp.notification.NotificationManager
 import com.fzanutto.todoapp.view.taskdetails.TaskDetailsActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity(), TaskAdapter.TaskClickListener {
 
@@ -36,7 +40,7 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.TaskClickListener {
 
         setSupportActionBar(binding.toolbar)
 
-        TaskRepository.initialize(this)
+        TaskRepositoryManager.initialize(this)
         NotificationManager.createNotificationChannel(this)
 
         _adapter = TaskAdapter(arrayListOf(), this)

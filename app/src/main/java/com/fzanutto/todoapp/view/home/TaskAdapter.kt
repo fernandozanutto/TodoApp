@@ -2,6 +2,7 @@ package com.fzanutto.todoapp.view.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fzanutto.todoapp.R
@@ -30,11 +31,15 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: T
         }
 
         listener.onToggleCheckAdapterItem(taskId)
-        notifyItemRangeChanged(0, itemCount)
+        updateAll()
     }
 
     fun uncheckEverything() {
         selectedItems.clear()
+        updateAll()
+    }
+
+    private fun updateAll() {
         notifyItemRangeChanged(0, itemCount)
     }
 
@@ -50,15 +55,19 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: T
         val context = holder.itemView.context
 
         holder.binding.apply {
-            card.setOnLongClickListener {
-                toggleItemSelected(task.id)
-                true
-            }
-
             card.isChecked = selectedItems.contains(task.id)
 
             title.text = task.title
-            timer.text = task.getNextRunEstimatedString()
+
+            if (task.getNextRun() != null) {
+                nextReminder.visibility = View.VISIBLE
+                timer.text = task.getNextRunEstimatedString(context)
+                card.alpha = 1f
+            } else {
+                nextReminder.visibility = View.GONE
+                timer.text = context.getString(R.string.task_done)
+                card.alpha = 0.5f
+            }
 
             if (task.repeat == RepeatType.DO_NOT_REPEAT) {
                 type.text = context.getString(R.string.one_time_task)
@@ -73,6 +82,11 @@ class TaskAdapter(private val taskList: ArrayList<Task>, private val listener: T
             } else {
                 toggleItemSelected(task.id)
             }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            toggleItemSelected(task.id)
+            true
         }
     }
 

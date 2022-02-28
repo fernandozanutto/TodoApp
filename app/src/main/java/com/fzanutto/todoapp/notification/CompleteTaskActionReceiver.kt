@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationManagerCompat
-import com.fzanutto.todoapp.database.TaskRepository
+import com.fzanutto.todoapp.database.TaskRepositoryManager
 import com.fzanutto.todoapp.notification.NotificationManager.taskIdTag
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,14 +17,14 @@ class CompleteTaskActionReceiver: BroadcastReceiver() {
         Log.d("notification", "notificaton to cancel ${taskId.taskIdToNotificationId()}")
         if (taskId == -1) return
 
-        TaskRepository.initialize(context)
+        TaskRepositoryManager.initialize(context)
 
         with(NotificationManagerCompat.from(context)) {
             cancel(taskId.taskIdToNotificationId())
         }
 
         CoroutineScope(Dispatchers.Default).launch {
-            val task = TaskRepository.getTaskById(taskId) ?: return@launch
+            val task = TaskRepositoryManager.getTaskById(taskId) ?: return@launch
 
             // TODO registrar que a task foi concluida
         }

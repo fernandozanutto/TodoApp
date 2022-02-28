@@ -2,10 +2,10 @@ package com.fzanutto.todoapp.database.room
 
 import android.content.Context
 import androidx.room.Room
-import com.fzanutto.todoapp.database.TaskRepositoryInterface
+import com.fzanutto.todoapp.database.TaskRepository
 import com.fzanutto.todoapp.models.Task
 
-class TaskRepositoryRoom(context: Context) : TaskRepositoryInterface {
+class TaskRepositoryRoom(context: Context) : TaskRepository {
 
     private val taskDAO: TaskDAO
 

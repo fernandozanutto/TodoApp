@@ -9,7 +9,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.fzanutto.todoapp.R
-import com.fzanutto.todoapp.database.TaskRepository
+import com.fzanutto.todoapp.database.TaskRepositoryManager
 import com.fzanutto.todoapp.notification.NotificationManager.channelID
 import com.fzanutto.todoapp.notification.NotificationManager.messageExtra
 import com.fzanutto.todoapp.notification.NotificationManager.taskIdTag
@@ -29,8 +29,8 @@ class TaskNotificationReceiver : BroadcastReceiver() {
         if (taskId == -1) return
 
         CoroutineScope(Dispatchers.Default).launch {
-            TaskRepository.initialize(context)
-            val task = TaskRepository.getTaskById(taskId) ?: return@launch
+            TaskRepositoryManager.initialize(context)
+            val task = TaskRepositoryManager.getTaskById(taskId) ?: return@launch
 
             val clickPendingIntent = getClickIntent(context, taskId)
 

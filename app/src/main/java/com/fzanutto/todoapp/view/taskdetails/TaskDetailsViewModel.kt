@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fzanutto.todoapp.database.TaskRepository
+import com.fzanutto.todoapp.database.TaskRepositoryManager
 import com.fzanutto.todoapp.models.RepeatType
 import com.fzanutto.todoapp.models.Task
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class TaskDetailsViewModel: ViewModel() {
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            TaskRepository.getTaskById(id)?.let { task ->
+            TaskRepositoryManager.getTaskById(id)?.let { task ->
                 _task.postValue(task)
             }
         }
@@ -40,14 +40,14 @@ class TaskDetailsViewModel: ViewModel() {
         } ?: Task(0, title, description, repeatType ?: RepeatType.DO_NOT_REPEAT, date, interval = interval)
 
         viewModelScope.launch(Dispatchers.IO) {
-            TaskRepository.saveTask(task)
+            TaskRepositoryManager.saveTask(task)
         }
     }
 
     fun deleteTask() {
         _task.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                TaskRepository.deleteTask(it)
+                TaskRepositoryManager.deleteTask(it)
             }
         }
     }

@@ -4,7 +4,7 @@ import com.fzanutto.todoapp.models.RepeatType
 import com.fzanutto.todoapp.models.Task
 import java.util.Date
 
-class TaskRepositoryMock: TaskRepositoryInterface {
+class TaskRepositoryMock: TaskRepository {
 
     private val taskList = arrayListOf(
         Task(1, "Beber água", "bebe aguaaaaaaa", RepeatType.SECONDS, Date(1645383091688), 20),
